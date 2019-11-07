@@ -1,0 +1,126 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/code/code.js"],css:["/assets/modular/code/code.css"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">代码生成</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <form id="codeForm" lay-filter="codeForm" class="layui-form model-form">
+                        <div class="layui-form-item">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-sm4">
+                                    <label class="layui-form-label">项目路径</label>
+                                    <div class="layui-input-block">
+                                        <input name="projectPath" placeholder="项目路径" type="text"
+                                            class="layui-input" autocomplete="off" value="${params.projectPath}" />
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm4">
+                                    <label class="layui-form-label">项目的包</label>
+                                    <div class="layui-input-block">
+                                        <input name="projectPackage" placeholder="项目的包" type="text"
+                                            class="layui-input" autocomplete="off" value="${params.projectPackage}" />
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm4">
+                                    <label class="layui-form-label">核心包</label>
+                                    <div class="layui-input-block">
+                                        <input name="corePackage" placeholder="核心包" type="text"
+                                            class="layui-input" autocomplete="off" value="${params.corePackage}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-sm4">
+                                    <label class="layui-form-label">业务名称</label>
+                                    <div class="layui-input-block">
+                                        <input name="bizName" placeholder="业务名称" type="text"
+                                            class="layui-input" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm4">
+                                    <label class="layui-form-label">模块名称</label>
+                                    <div class="layui-input-block">
+                                        <input name="moduleName" placeholder="模块名称" type="text"
+                                            class="layui-input" autocomplete="off" value="${params.moduleName}" />
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm4">
+                                    <label class="layui-form-label">父级名称</label>
+                                    <div class="layui-input-block">
+                                        <input name="parentMenuName" id="parentMenuName" placeholder="父级菜单名称" type="text"
+                                            class="layui-input" autocomplete="off" value="${params.parentMenuName}" />
+                                        <div id="pcodeTreeDiv" style="display: none; position: absolute; z-index: 200;">
+                                            <ul id="pcodeTree" class="ztree tree-box"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-sm12">
+                                        <label class="layui-form-label">数据表</label>
+                                        <div class="layui-input-block">
+                                            <select name="tableName" lay-filter="tableName">
+                                                <option value=""></option>
+                                                @for(table in tables!){
+                                                    <option value="${table.tableName}">${table.tableName}-${table.tableComment}</option>
+                                                @}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-sm4">
+                                        <label class="layui-form-label">表名称</label>
+                                        <div class="layui-input-block">
+                                            <input name="tableName" id="tableName" placeholder="表名称" type="text"
+                                                class="layui-input" autocomplete="off" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-sm4">
+                                        <label class="layui-form-label">表前缀</label>
+                                        <div class="layui-input-block">
+                                            <input name="ignoreTabelPrefix" id="ignoreTabelPrefix" placeholder="表前缀" type="text"
+                                                class="layui-input" autocomplete="off" value="${params.ignoreTabelPrefix}" />
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-sm4">
+                                        <label class="layui-form-label">类名</label>
+                                        <div class="layui-input-block">
+                                            <input name="className" id="className" placeholder="类名" type="text"
+                                                class="layui-input" autocomplete="off" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">可用模板</label>
+                                <div class="layui-input-block">
+                                    @for(template in templates!){
+                                        <input type="checkbox" name="templateName" value="${template.key}" title="${template.desc}" checked="" > 
+                                    @}
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="formDemo">生成</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@}
+    
