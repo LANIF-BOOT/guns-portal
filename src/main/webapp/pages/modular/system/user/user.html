@@ -26,7 +26,7 @@
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
-                                @if(shiro.hasPermission("/mgr/add")){
+                                @if(shiro.hasPermission("/manage/mgr/add")){
                                 <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
                                 @}
                                 <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
@@ -41,16 +41,16 @@
 </div>
 
 <script type="text/html" id="tableBar">
-    @if(shiro.hasPermission("/mgr/edit")){
+    @if(shiro.hasPermission("/manage/mgr/edit")){
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
     @}
-    @if(shiro.hasPermission("/mgr/delete")){
+    @if(shiro.hasPermission("/manage/mgr/delete")){
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
     @}
-    @if(shiro.hasPermission("/mgr/setRole")){
+    @if(shiro.hasPermission("/manage/mgr/setRole")){
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="roleAssign">分配角色</a>
     @}
-    @if(shiro.hasPermission("/mgr/reset")){
+    @if(shiro.hasPermission("/manage/mgr/reset")){
     <a class="layui-btn layui-btn-xs" lay-event="reset">重置密码</a>
     @}
 </script>
