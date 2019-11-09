@@ -26,7 +26,7 @@ layui.use(["layer", "ztree", "form", "ax"], function() {
       data.field[$(this).val()] = true;
     });
 
-    $.post("/code/generate", data.field, function() {
+    $.post("/manage/code/generate", data.field, function() {
       layer.msg("代码自动创建完成！");
     });
     return false;

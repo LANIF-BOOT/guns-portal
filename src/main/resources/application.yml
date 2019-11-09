@@ -20,7 +20,7 @@ spring:
       prefix: /pages
   devtools:
     restart:
-      enabled: false
+      enabled: false                #建议生成完代码后，再开启
       additional-paths: src/main/java
       exclude: assets/**,pages/**
   servlet:

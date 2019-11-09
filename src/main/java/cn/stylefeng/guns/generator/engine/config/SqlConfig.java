@@ -54,7 +54,7 @@ public class SqlConfig {
         menu.setPcodes(pcodeAndPcodes[1] + "[" + pcodeAndPcodes[0] + "],");
         menu.setName(contextConfig.getBizChName());
         menu.setIcon("");
-        menu.setUrl("/" + contextConfig.getBizEnName());
+        menu.setUrl("/manage/" + contextConfig.getBizEnName());
         menu.setNum(99);
 
         if (parentMenuName.equals("顶级")) {
@@ -78,28 +78,28 @@ public class SqlConfig {
         Menu add = createSubMenu(menu);
         add.setCode(contextConfig.getBizEnName() + "_add");
         add.setName(contextConfig.getBizChName() + "添加");
-        add.setUrl("/" + contextConfig.getBizEnName() + "/add");
+        add.setUrl("/manage/" + contextConfig.getBizEnName() + "/add");
         menus.add(add);
 
         //更新
         Menu update = createSubMenu(menu);
         update.setCode(contextConfig.getBizEnName() + "_update");
         update.setName(contextConfig.getBizChName() + "更新");
-        update.setUrl("/" + contextConfig.getBizEnName() + "/update");
+        update.setUrl("/manage/" + contextConfig.getBizEnName() + "/update");
         menus.add(update);
 
         //删除
         Menu delete = createSubMenu(menu);
         delete.setCode(contextConfig.getBizEnName() + "_delete");
         delete.setName(contextConfig.getBizChName() + "删除");
-        delete.setUrl("/" + contextConfig.getBizEnName() + "/delete");
+        delete.setUrl("/manage/" + contextConfig.getBizEnName() + "/delete");
         menus.add(delete);
 
         //详情
         Menu detail = createSubMenu(menu);
         detail.setCode(contextConfig.getBizEnName() + "_detail");
         detail.setName(contextConfig.getBizChName() + "详情");
-        detail.setUrl("/" + contextConfig.getBizEnName() + "/detail");
+        detail.setUrl("/manage/" + contextConfig.getBizEnName() + "/detail");
         menus.add(detail);
     }
 

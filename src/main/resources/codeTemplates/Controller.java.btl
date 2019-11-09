@@ -73,7 +73,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Object delete(@RequestParam Integer ${context.bizEnName}Id) {
+    public Object delete(@RequestParam Long ${context.bizEnName}Id) {
         ${context.bizEnName}Service.removeById(${context.bizEnName}Id);
         return SUCCESS_TIP;
     }
@@ -93,7 +93,7 @@ public class ${context.bizEnBigName}Controller extends BaseController {
      */
     @RequestMapping(value = "/detail/{${context.bizEnName}Id}")
     @ResponseBody
-    public Object detail(@PathVariable("${context.bizEnName}Id") Integer ${context.bizEnName}Id) {
+    public Object detail(@PathVariable("${context.bizEnName}Id") Long ${context.bizEnName}Id) {
         ${context.entityName} ${context.bizEnName} = this.${context.bizEnName}Service.getById(${context.bizEnName}Id);
         return ResponseData.success(${context.bizEnName});
     }
