@@ -15,15 +15,15 @@
  */
 package cn.stylefeng.guns.core.interceptor;
 
-import cn.stylefeng.guns.core.shiro.ShiroKit;
-import cn.stylefeng.guns.core.shiro.ShiroUser;
-import cn.stylefeng.guns.core.util.DefaultImages;
-import org.apache.shiro.authc.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import cn.stylefeng.guns.core.shiro.ShiroKit;
+import cn.stylefeng.guns.core.shiro.ShiroUser;
+import cn.stylefeng.guns.core.util.DefaultImages;
 
 
 /**
