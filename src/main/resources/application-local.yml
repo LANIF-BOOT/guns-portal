@@ -6,7 +6,7 @@ spring:
     username: root
     password: 1
     filters: wall,mergeStat
-    data-source-name: gunsdb
+    data-source-name: guns
 
 # 多数据源情况的配置
 guns:

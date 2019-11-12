@@ -17,7 +17,7 @@ import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
 @Service
 public class TableService {
 
-    @Value("${spring.datasource.db-name:guns}")
+    @Value("${spring.datasource.data-source-name:guns}")
     private String dbName;
 
     /**
