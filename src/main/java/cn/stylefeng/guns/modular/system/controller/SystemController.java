@@ -199,7 +199,7 @@ public class SystemController extends BaseController {
             throw new RequestEmptyException("请求数据不完整！");
         }
 
-        return "/common/tree_dlg.html";
+        return "/common/system/tree_dlg.html";
     }
 
     /**

@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{js:["/assets/modular/${context.moduleName}/${context.bizEnName}/${context.bizEnName}.js"]}){
+@layout("/common/system/_container.html",{js:["/assets/modular/${context.moduleName}/${context.bizEnName}/${context.bizEnName}.js"]}){
 <div class="layui-body-header">
     <span class="layui-body-header-title">${context.bizChName}管理</span>
 </div>
