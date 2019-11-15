@@ -10,11 +10,22 @@ layui.use(["layer", "ztree", "form", "ax"], function() {
     $("#tableName").val(data.value);
     $("#className").val(Feng.underLineToCamel(data.value.substring(preSize)));
   });
+  
+  $("#ignoreTabelPrefix").on("change", function(e) {
+	var preSize = $("#ignoreTabelPrefix").val().length;
+	var data = $("#tableName").val();
+	$("#tableName").val(data);
+    $("#className").val(Feng.underLineToCamel(data.substring(preSize)));
+  })
 
   //监听提交
   form.on("submit(formDemo)", function(data) {
     if (!data.field.tableName) {
       Feng.info("请选择要生成的表");
+      return false;
+    }
+    if (!data.field.bizName) {
+      Feng.info("请填写业务名称");
       return false;
     }
     if ($("#codeForm input[name=templateName]:checked").length == 0) {

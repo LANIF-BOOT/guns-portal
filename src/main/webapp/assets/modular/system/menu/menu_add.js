@@ -23,7 +23,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     $('#pcodeName').click(function () {
         var formName = encodeURIComponent("parent.MenuInfoDlg.data.pcodeName");
         var formId = encodeURIComponent("parent.MenuInfoDlg.data.pid");
-        var treeUrl = encodeURIComponent("/menu/selectMenuTreeList");
+        var treeUrl = encodeURIComponent("/manage/menu/selectMenuTreeList");
 
         layer.open({
             type: 2,
