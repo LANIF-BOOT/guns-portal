@@ -15,6 +15,24 @@
  */
 package cn.stylefeng.guns.modular.system.controller;
 
+import static cn.stylefeng.roses.core.util.HttpContext.getIp;
+
+import java.net.URLEncoder;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.hutool.core.util.URLUtil;
 import cn.stylefeng.guns.core.common.node.MenuNode;
 import cn.stylefeng.guns.core.log.LogManager;
 import cn.stylefeng.guns.core.log.factory.LogTaskFactory;
@@ -22,17 +40,6 @@ import cn.stylefeng.guns.core.shiro.ShiroKit;
 import cn.stylefeng.guns.core.shiro.ShiroUser;
 import cn.stylefeng.guns.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.List;
-
-import static cn.stylefeng.roses.core.util.HttpContext.getIp;
 
 /**
  * 登录控制器
@@ -95,7 +102,7 @@ public class LoginController extends BaseController {
      * @Date 2018/12/23 5:42 PM
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginVali() {
+    public String loginVali(HttpServletRequest request) {
 
         String username = super.getPara("username").trim();
         String password = super.getPara("password").trim();
@@ -119,8 +126,21 @@ public class LoginController extends BaseController {
         LogManager.me().executeLog(LogTaskFactory.loginLog(shiroUser.getId(), getIp()));
 
         ShiroKit.getSession().setAttribute("sessionFlag", true);
-
-        return REDIRECT + "/manage";
+        // 获取跳转前url
+        String referer = request.getHeader("Referer");
+        String refererPath = URLUtil.getPath(referer);
+        String uri = request.getRequestURI();
+    	if (uri.indexOf("manage")>-1 && refererPath.indexOf("manage")>-1){
+    		return REDIRECT + "/manage";
+    	}else{
+    		return REDIRECT + refererPath;
+    	}
+//        SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+//        if (savedRequest != null) {
+//        	return REDIRECT + savedRequest.getRequestUrl();
+//        } else {
+//        	return REDIRECT + "/manage";
+//        }
     }
 
     /**
@@ -130,10 +150,20 @@ public class LoginController extends BaseController {
      * @Date 2018/12/23 5:42 PM
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logOut() {
+    public String logOut(HttpServletRequest request) {
         LogManager.me().executeLog(LogTaskFactory.exitLog(ShiroKit.getUserNotNull().getId(), getIp()));
         ShiroKit.getSubject().logout();
         deleteAllCookie();
-        return REDIRECT + "/manage/login";
+        
+        // 获取跳转前url
+        String referer = request.getHeader("Referer");
+        String refererPath = URLUtil.getPath(referer);
+        String uri = request.getRequestURI();
+        // 从后台退出
+    	if (uri.indexOf("manage")>-1 && refererPath.indexOf("manage")>-1){
+    		return REDIRECT + "/manage/login";
+    	}else{ // 从前台退出
+    		return REDIRECT + "/";
+    	}
     }
 }
