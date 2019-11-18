@@ -87,10 +87,18 @@ public class LoginController extends BaseController {
      * @Date 2018/12/23 5:41 PM
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
+    public String login(Model model, HttpServletRequest request) {
         if (ShiroKit.isAuthenticated() || ShiroKit.getUser() != null) {
             return REDIRECT + "/manage";
         } else {
+        	// 获取跳转前url
+            String referer = request.getHeader("Referer");
+            String refererPath = URLUtil.getPath(referer);
+            String uri = request.getRequestURI();
+        	if (uri.indexOf("manage")>-1 && refererPath.indexOf("manage")>-1){
+        	}else{
+        		model.addAttribute("backURL", refererPath);
+        	}
             return PREFIX + "login.html";
         }
     }
@@ -107,6 +115,7 @@ public class LoginController extends BaseController {
         String username = super.getPara("username").trim();
         String password = super.getPara("password").trim();
         String remember = super.getPara("remember");
+        String backURL = super.getPara("backURL");
 
         Subject currentUser = ShiroKit.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password.toCharArray());
@@ -130,7 +139,10 @@ public class LoginController extends BaseController {
         String referer = request.getHeader("Referer");
         String refererPath = URLUtil.getPath(referer);
         String uri = request.getRequestURI();
-    	if (uri.indexOf("manage")>-1 && refererPath.indexOf("manage")>-1){
+        
+        if (backURL != null) {
+        	return REDIRECT + backURL;
+        } else if (uri.indexOf("manage")>-1 && refererPath.indexOf("manage")>-1){
     		return REDIRECT + "/manage";
     	}else{
     		return REDIRECT + refererPath;
