@@ -87,21 +87,26 @@ public class LoginController extends BaseController {
      * @Date 2018/12/23 5:41 PM
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, HttpServletRequest request) {
-        if (ShiroKit.isAuthenticated() || ShiroKit.getUser() != null) {
-            return REDIRECT + "/manage";
-        } else {
-        	// 获取跳转前url
-            String referer = request.getHeader("Referer");
-            String refererPath = URLUtil.getPath(referer);
-            String uri = request.getRequestURI();
-        	if (uri.indexOf("manage")>-1 && refererPath.indexOf("manage")>-1){
-        	}else{
-        		model.addAttribute("backURL", refererPath);
-        	}
-            return PREFIX + "login.html";
-        }
-    }
+	public String login(Model model, HttpServletRequest request) {
+		if (ShiroKit.isAuthenticated() || ShiroKit.getUser() != null) {
+			return REDIRECT + "/manage";
+		} else {
+			// 获取跳转前url
+			String referer = request.getHeader("Referer");
+			if (referer != null) {
+				String refererPath = URLUtil.getPath(referer);
+				String uri = request.getRequestURI();
+				model.addAttribute("backURL", refererPath);
+				// 如果当前是后台界面
+				if (uri.indexOf("manage") > -1 && refererPath.indexOf("manage") > -1) {
+					return PREFIX + "login.html";
+				} else { // 如果是从前台过来的
+					model.addAttribute("backURL", refererPath);
+				}
+			}
+			return PREFIX + "login.html";
+		}
+	}
 
     /**
      * 点击登录执行的动作
