@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
@@ -32,12 +33,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.code.kaptcha.Constants;
+
 import cn.hutool.core.util.URLUtil;
+import cn.stylefeng.guns.core.common.exception.InvalidKaptchaException;
 import cn.stylefeng.guns.core.common.node.MenuNode;
 import cn.stylefeng.guns.core.log.LogManager;
 import cn.stylefeng.guns.core.log.factory.LogTaskFactory;
 import cn.stylefeng.guns.core.shiro.ShiroKit;
 import cn.stylefeng.guns.core.shiro.ShiroUser;
+import cn.stylefeng.guns.core.util.KaptchaUtil;
 import cn.stylefeng.guns.modular.system.service.UserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 
@@ -121,6 +126,15 @@ public class LoginController extends BaseController {
         String password = super.getPara("password").trim();
         String remember = super.getPara("remember");
         String backURL = super.getPara("backURL");
+        
+        // 判断验证码
+        if (KaptchaUtil.getKaptchaOnOff()) {
+        	String kaptcha = super.getPara("code");
+        	Object kaptchaObj = super.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        	if (kaptchaObj == null || StringUtils.isBlank(kaptchaObj.toString()) || !kaptchaObj.equals(kaptcha)) {
+        		throw new InvalidKaptchaException();
+        	}
+        }
 
         Subject currentUser = ShiroKit.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password.toCharArray());
