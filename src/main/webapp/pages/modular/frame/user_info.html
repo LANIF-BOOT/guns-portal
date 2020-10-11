@@ -52,9 +52,10 @@
 
                     <div class="layui-tab layui-tab-brief" lay-filter="userInfoTab">
                         <ul class="layui-tab-title">
-                            <li class="layui-this">基本信息</li>
-                            <li>其他</li>
+                            <li class="layui-this">基本信息 - ${shiro.getUser().roleNames!}</li>
+                            <!-- <li>其他</li> -->
                         </ul>
+
                         <div class="layui-tab-content">
                             <div class="layui-form layui-tab-item layui-show" lay-filter="userInfoForm">
                                 <input type="hidden" name="userId"/>

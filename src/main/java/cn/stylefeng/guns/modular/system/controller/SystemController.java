@@ -46,10 +46,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
@@ -303,6 +303,7 @@ public class SystemController extends BaseController {
     @ResponseBody
     public ResponseData layuiUpload(@RequestPart("file") MultipartFile picture) {
 
+        String originalFilename = picture.getOriginalFilename();
         String pictureName = UUID.randomUUID().toString() + "." + ToolUtil.getFileSuffix(picture.getOriginalFilename());
         try {
             String fileSavePath = gunsProperties.getFileUploadPath();
@@ -313,8 +314,46 @@ public class SystemController extends BaseController {
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("fileId", IdWorker.getIdStr());
+        map.put("fileName", pictureName);
+        map.put("originalFilename", originalFilename);
         return ResponseData.success(0, "上传成功", map);
     }
 
-
+    /**
+     * 展示上传的文件
+     *
+     * @author weiq
+     */
+    @RequestMapping("/readFile/{fileName:.+}")
+    public void readFile(@PathVariable String fileName, HttpServletRequest request, HttpServletResponse response) {
+        ServletOutputStream out = null;
+        InputStream in = null;
+        try {
+            out = response.getOutputStream();
+            String fileSavePath = gunsProperties.getFileUploadPath();
+            in = new FileInputStream(fileSavePath + fileName);
+            int len = 0;
+            byte[] buffer = new byte[1024];
+            while ((len = in.read(buffer)) > 0) {
+                out.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

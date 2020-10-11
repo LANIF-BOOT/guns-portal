@@ -1,23 +1,7 @@
-DROP DATABASE IF EXISTS guns;
-CREATE DATABASE IF NOT EXISTS guns DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+DROP DATABASE IF EXISTS lvylikedu;
+CREATE DATABASE IF NOT EXISTS lvylikedu DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-USE guns;
-
-/*
- Navicat MySQL Data Transfer
-
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 50723
- Source Host           : localhost:3306
- Source Schema         : guns
-
- Target Server Type    : MySQL
- Target Server Version : 50723
- File Encoding         : 65001
-
- Date: 02/06/2019 23:23:23
-*/
+USE lvylikedu;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -253,7 +237,6 @@ CREATE TABLE `sys_notice`  (
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES (6, '欢迎', 'hi，Guns旗舰版发布了！', '2017-01-11 08:53:20', 1, '2018-12-28 23:24:48', 1);
 INSERT INTO `sys_notice` VALUES (8, '你好', '你好，世界！', '2017-05-10 19:28:57', 1, '2018-12-28 23:28:26', 1);
 
 -- ----------------------------
@@ -452,6 +435,6 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, '1', 'admin', '1d6b1208c7d151d335790276a18e3d99', 'q6taw', 'stylefeng', '2018-11-16 00:00:00', 'M', 'sn93@qq.com', '18200000000', '1', 27, 'ENABLE', '2016-01-29 08:49:53', NULL, '2018-12-28 22:52:24', 24, 25);
+INSERT INTO `sys_user` VALUES (1, '1', 'admin', '1d6b1208c7d151d335790276a18e3d99', 'q6taw', 'admin', '2018-11-16 00:00:00', 'M', 'sn93@qq.com', '18200000000', '1', 27, 'ENABLE', '2016-01-29 08:49:53', NULL, '2018-12-28 22:52:24', 24, 25);
 
 SET FOREIGN_KEY_CHECKS = 1;

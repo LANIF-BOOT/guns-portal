@@ -78,6 +78,7 @@ public class KaptchaController {
         // create the image with the text
         BufferedImage bi = producer.createImage(capText);
         ServletOutputStream out = null;
+        System.out.println("capText:" + capText);
         try {
             out = response.getOutputStream();
         } catch (IOException e) {

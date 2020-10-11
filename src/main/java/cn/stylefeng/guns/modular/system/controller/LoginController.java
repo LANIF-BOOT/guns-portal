@@ -159,8 +159,8 @@ public class LoginController extends BaseController {
         String refererPath = URLUtil.getPath(referer);
         String uri = request.getRequestURI();
         
-        if (backURL != null) {
-        	return REDIRECT + backURL;
+        if (StringUtils.isNotBlank(backURL) && !"".equals(request.getContextPath())) {
+        	return REDIRECT + backURL.split(request.getContextPath())[1];
         } else if (uri.indexOf("manage")>-1 && refererPath.indexOf("manage")>-1){
     		return REDIRECT + "/manage";
     	}else{

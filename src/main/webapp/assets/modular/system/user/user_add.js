@@ -55,6 +55,9 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
+        if (!data.field.birthday) {
+            delete data.field.birthday;
+        }
         var ajax = new $ax(Feng.ctxPath + "/manage/mgr/add", function (data) {
             Feng.success("添加成功！");
 

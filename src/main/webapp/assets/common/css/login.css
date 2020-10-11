@@ -1,10 +1,10 @@
 /** 登录页面样式 */
 
 body {
-    background-image: url("../images/bg_login2.svg");
-    background-position: center 110px;
+    background-image: url("../images/bg_login.jpg");
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-color: #f0f2f5;
 }
 
@@ -22,25 +22,32 @@ body {
 }
 
 .login-body {
-    padding: 10px 10px 40px 10px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-top: 200px;
+    padding-bottom: 130px;
+    position: relative;
 }
 
 .login-body > .layui-card {
-    max-width: 360px;
+    max-width: 400px;
     margin: 0 auto;
 }
 
 .login-body .layui-card-header {
-    font-weight: 700;
-    font-size: 15px;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+    height: 62px;
+    line-height: 62px;
 }
 
 .login-body .layui-form-pane .layui-form-label {
-    width: 78px;
+    width: 48px;
 }
 
 .login-body .layui-form-pane .layui-input-block {
-    margin-left: 78px;
+    margin-left: 48px;
 }
 
 .login-body .login-captcha {
@@ -101,14 +108,18 @@ body {
 /** 头部样式 */
 .login-header {
     font-family: Myriad Pro, Helvetica Neue, Arial, Helvetica, sans-serif;
-    font-size: 20px;
+    height: 70px;
+    line-height: 70px;
+    padding: 0 60px;
+    font-size: 22px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.85) !important;
-    padding: 10px;
+    color: #333;
+    background: #fff;
 }
 
 .login-header img {
-    height: 35px;
+    height: 56px;
+    margin-right: 10px;
 }
 
 /** 移动设备样式 */
@@ -117,12 +128,6 @@ body {
         position: absolute;
         bottom: 0;
         width: 100%;
-    }
-}
-
-@media screen and (min-height: 670px) {
-    .login-body {
-        padding: 110px 10px 40px 10px;
     }
 }
 
@@ -157,4 +162,142 @@ body {
 
 .login-footer a:hover {
     color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.ew-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, .8);
+    z-index: 1000;
+    padding: 0 60px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05)
+}
+
+.ew-header .layui-logo {
+    height: 70px;
+    line-height: 70px;
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    padding-left: 42px;
+    background-image: url("../images/logo.png");
+    background-size: 32px;
+    background-position: 0 19px;
+    background-repeat: no-repeat
+}
+
+.ew-header .layui-nav {
+    padding: 0;
+    background-color: transparent;
+    position: absolute;
+    right: 70px;
+    top: 0
+}
+
+.ew-header .layui-nav>.layui-nav-item {
+    padding: 0 20px
+}
+
+.ew-header .layui-nav>.layui-nav-item>a {
+    height: 70px;
+    line-height: 70px;
+    color: #666;
+    font-size: 16px;
+    padding: 0 5px;
+    position: relative;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.ew-header .layui-nav>.layui-nav-item>a>span {
+    max-width: 90px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.ew-header .layui-nav>.layui-nav-item>a:hover,.ew-header .layui-nav>.layui-nav-item.layui-this>a {
+    color: #029789
+}
+
+.ew-header .layui-nav .layui-nav-more {
+    border-color: #999 transparent transparent
+}
+
+.ew-header .layui-nav .layui-nav-mored {
+    border-color: transparent transparent #999
+}
+
+.ew-header .layui-nav>.layui-nav-item>a:hover>.layui-nav-more,.ew-header .layui-nav>.layui-nav-item.layui-this>a>.layui-nav-more {
+    border-color: #029789 transparent transparent
+}
+
+.ew-header .layui-nav>.layui-nav-item>a:hover>.layui-nav-mored,.ew-header .layui-nav>.layui-nav-item.layui-this>a>.layui-nav-mored {
+    border-color: transparent transparent #029789
+}
+
+.ew-header .layui-nav .layui-nav-bar,.ew-header .layui-nav>.layui-nav-item:after {
+    display: none
+}
+
+.ew-header .layui-nav>.layui-nav-item>a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 0;
+    margin: 0 auto;
+    height: 3px;
+    background-color: #029789;
+    transition: width .2s ease-out
+}
+
+.ew-header .layui-nav>.layui-nav-item.layui-this>a:after,.ew-header .layui-nav>.layui-nav-item>a:hover:after {
+    width: 100%
+}
+
+.ew-header .layui-nav>.layui-nav-item>.layui-nav-child {
+    top: 75px;
+    border-radius: 0;
+    border-color: #dfdfdf;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    min-width: unset;
+    width: 120px;
+    right: 0;
+    margin: 0 auto
+}
+
+.ew-header .layui-nav>.layui-nav-item.nav-btn-login {
+    height: 70px;
+    line-height: 70px;
+    padding: 0 0 0 15px
+}
+
+.ew-header .layui-nav>.layui-nav-item.nav-btn-login>a {
+    padding: 0 15px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 35px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,.08)
+}
+
+.ew-header .layui-nav>.layui-nav-item.nav-btn-login>a:hover {
+    color: #666;
+    background-color: rgba(0,0,0,.15)
+}
+
+.ew-header .layui-nav>.layui-nav-item.nav-btn-login>a:after {
+    display: none
+}
+
+.ew-header .nav-toggle {
+    display: none
 }
